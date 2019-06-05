@@ -1,0 +1,38 @@
+## -*- coding: utf-8 -*-
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/2.0">
+
+    <Folder>
+        <name>${map_label}</name>
+        <visibility>1</visibility>
+        <open>0</open>
+        <Snippet maxLines="0"></Snippet>
+        % for layer in layers_list:
+        <NetworkLink>
+            <name>${layer['label']}</name>
+            <visibility>0</visibility>
+            <open>0</open>
+            <refreshVisibility>0</refreshVisibility>
+            <Snippet maxLines="0"></Snippet>
+            <description>${layer['label']}</description>
+            <Url>
+                <href><![CDATA[${host}?request=layer&map=${mapfile}&typename=${layer['name']}]]></href>
+                <refreshMode>onChange</refreshMode>
+                <viewRefreshMode>onStop</viewRefreshMode>
+                <viewRefreshTime>2</viewRefreshTime>
+            </Url>
+        </NetworkLink>
+        % endfor
+        
+        % if logo_url != '':
+        <ScreenOverlay id='logo'>
+            <overlayXY x='1.05' y='0' xunits='fraction' yunit='fraction'/>
+            <screenXY x='200' y='50' xunits='pixels' yunits='pixels'/>
+            <Icon>
+                <href><![CDATA[${logo_url}]]></href>
+            </Icon>
+        </ScreenOverlay>
+        % endif
+    </Folder>
+
+</kml>

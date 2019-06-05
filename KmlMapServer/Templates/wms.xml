@@ -1,0 +1,25 @@
+## -*- coding: utf-8 -*-
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+    <GroundOverlay>
+        <name>${layer_label}</name>
+        <visibility>1</visibility>
+        <open>1</open>
+        <color>ffffffff</color>
+        <Icon>
+            <href><![CDATA[${wms_url}]]></href>
+            <refreshMode>onChange</refreshMode>
+            <viewRefreshMode>onStop</viewRefreshMode>
+            <viewRefreshTime>2</viewRefreshTime>
+        </Icon>
+        <altitude>0</altitude> 
+        <altitudeMode>clampToGround</altitudeMode>
+        
+        <LatLonBox>
+            <north>${north}</north>
+            <south>${south}</south>
+            <east>${east}</east>
+            <west>${west}</west>
+        </LatLonBox>
+    </GroundOverlay>
+</kml>

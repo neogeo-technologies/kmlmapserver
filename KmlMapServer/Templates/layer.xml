@@ -1,0 +1,43 @@
+## -*- coding: utf-8 -*-
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+    <Document>
+        <Name>${layer_label}</Name>
+        % for s in styles:
+            <Style id="Style_${ s['style_id']}">
+            % if s['style_type'] == 'point': 
+                <IconStyle>
+                    <scale>${s['icon_scale']}</scale>
+                    <Icon>
+                        <href><![CDATA[${s['icon_url']}]]></href>
+                    </Icon>
+                </IconStyle>
+            % else:
+                <LineStyle>
+                    <width>${s['line_width']}</width>
+                    <color>${s['line_color']}</color>
+                </LineStyle>
+            % endif
+            % if s['style_type'] != 'point' and s['color'] != '':
+                <PolyStyle>
+                    <color>${s['color']}</color>
+                </PolyStyle>
+            % endif
+            <BalloonStyle><text><![CDATA[${s['balloon_style']}]]></text><displayMode>default</displayMode></BalloonStyle>
+            </Style>
+        % endfor
+        
+        % for p in placemarks:
+            <Placemark>
+                % for k in p.keys():
+                    % if k != 'geom':
+                        <${k}><![CDATA[${p[k]}]]></${k}>
+                    % else:
+                        ${p[k]}
+                    % endif
+                % endfor
+            </Placemark>
+        % endfor
+        
+    </Document>
+</kml>
